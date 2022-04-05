@@ -23,8 +23,8 @@ public class ExperimentManager : MonoBehaviour
 
 	private void Update()
 	{
-		populationFitness += 0.1f;
-		scoring.text = $"Fitness: {populationFitness.ToString("0.0")}\nGeneration: {generationCounter}\n Max Fitness Achieved: {maxFitness.ToString("0.0")}";
+		//populationFitness += 0.1f;
+		scoring.text = $"Fitness: {populationFitness.ToString("0.0")}\nGeneration: {generationCounter}\n Top Fitness:{maxFitness.ToString("0.0")}";
 
 		GameObject[] birds = GameObject.FindGameObjectsWithTag("Player");
 		if(birds.Length == 0)
@@ -66,6 +66,16 @@ public class ExperimentManager : MonoBehaviour
 			generator.ResetGenerator();
 			TCPClient client = GetComponent<TCPClient>();
 			client.SendMultipleNNs(elements,  initPopulation);
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		print("experimnet: collided");
+		if(collision.CompareTag("Checkpoint"))
+		{
+			print("Experiment: triggered");
+			populationFitness += 1;
 		}
 	}
 }

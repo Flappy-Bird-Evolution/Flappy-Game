@@ -46,8 +46,8 @@ public class PipeGeneration : MonoBehaviour
 		GameObject bottom = Instantiate(Pipe, new Vector2(startingX, upperHeight - gapSize), Quaternion.identity);
 		bottom.GetComponent<Pipe>().Init(Direction.UPWARDS, 20);
 
-		//float checkpointY = (upper.transform.position.y + bottom.transform.position.y) / 2f;
-		//GameObject checkpointCollider = Instantiate(checkpoint, new Vector2(startingX, checkpointY), Quaternion.identity);
+		float checkpointY = (upper.transform.position.y + bottom.transform.position.y) / 2f;
+		GameObject checkpointCollider = Instantiate(checkpoint, new Vector2(startingX, checkpointY), Quaternion.identity);
 		//checkpointCollider.transform.SetParent(upper.transform);
 
 		pairs.Add(new GameObject[] { upper, bottom });
@@ -82,6 +82,12 @@ public class PipeGeneration : MonoBehaviour
 		{
 			Destroy(pair[0]);
 			Destroy(pair[1]);
+		}
+
+		GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+		foreach(GameObject c in checkpoints)
+		{
+			Destroy(c);
 		}
 		StopAllCoroutines();
 		pairs.Clear();

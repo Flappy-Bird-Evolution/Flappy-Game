@@ -9,6 +9,7 @@ TagManager:
   - Generator
   - Checkpoint
   - Floor
+  - FitnessInspector
   layers:
   - Default
   - TransparentFX
